@@ -14,6 +14,8 @@ import LoanForm from "../screens/LoanForm";
 import NewCustomer from "../screens/NewCustomer";
 import CalendarScreen from "../screens/CalendarScreen";
 import HistoryScreen from "../screens/History";
+import RequestReset from "./../screens/RequestPassword";
+import ResetPassword from "./../screens/ResetPassword";
 
 const Stack = createStackNavigator();
 
@@ -106,6 +108,20 @@ function AppContainer({ auth }) {
           }}
           name="SignupScreen"
           component={SignupScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="RequestReset"
+          component={RequestReset}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="ResetPassword"
+          component={ResetPassword}
         />
       </Stack.Navigator>
     </NavigationContainer>

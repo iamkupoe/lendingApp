@@ -25,6 +25,7 @@ class RequestReset extends Component {
   }
 
   render() {
+    const { navigation, auth } = this.props;
     return (
       <TouchableWithoutFeedback
         onPress={() => {
@@ -47,11 +48,7 @@ class RequestReset extends Component {
                 <View style={styles.header}>
                   <Text style={styles.text_header}>Request Password Reset</Text>
                 </View>
-                <Text
-                  style={[styles.text_footer, { marginTop: 15, color: "#fff" }]}
-                >
-                  Email
-                </Text>
+
                 <View style={styles.action}>
                   <Feather name="mail" color="#fff" size={20} />
                   <TextInput
@@ -73,7 +70,12 @@ class RequestReset extends Component {
                     style={styles.signIn}
                   >
                     <TouchableOpacity onPress={this.handleOnSubmit}>
-                      <Text style={[styles.textSign, { color: "#fff" }]}>
+                      <Text
+                        onPress={() => {
+                          navigation.navigate("RequestReset");
+                        }}
+                        style={[styles.textSign, { color: "#fff" }]}
+                      >
                         Reset
                       </Text>
                     </TouchableOpacity>
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 35,
   },
   signIn: {
     width: "60%",
