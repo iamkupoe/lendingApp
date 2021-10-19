@@ -41,7 +41,7 @@ class RegisterScreen extends Component {
   };
 
   render() {
-    // const { navigation, auth } = this.props;
+    const { navigation, auth } = this.props;
     return (
       <ImageBackground
         source={require("../assets/images/office2.jpg")}
