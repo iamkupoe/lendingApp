@@ -148,7 +148,7 @@ class LoginScreen extends Component {
             <Text style={styles.resetAccount}>Forgot password? </Text>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("LogInScreen");
+                navigation.navigate("RequestReset");
               }}
               style={styles.createAccountOpacity}
             >
