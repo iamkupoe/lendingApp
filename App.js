@@ -1,22 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import RegisterScreen from "./screens/RegisterScreen";
-import StartScreen from "./screens/StartScreen";
+import { Provider } from "react-redux";
+import { store, persistor } from "./redux/store";
+import AppContainer from "./navigation/Navigation";
+import { PersistGate } from "redux-persist/integration/react";
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      {/*<StartScreen />*/}
-      <RegisterScreen />
-    </View>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppContainer />
+      </PersistGate>
+    </Provider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default App;

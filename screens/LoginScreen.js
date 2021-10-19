@@ -10,20 +10,18 @@ import {
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { connect } from "react-redux";
-// import {
-//   createEmailAccount,
-//   registerError,
-// } from "./../redux/actions/authActions";
+// import { connect } from "react-redux";
+// import { loginEmailAccount } from "../redux/actions/authActions";
 
-class RegisterScreen extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      eye: "eye",
+      eye: "eye-Off",
       email: "",
       password: "",
-      confirm: "",
+      showPassword: true,
     };
   }
 
@@ -32,51 +30,44 @@ class RegisterScreen extends Component {
       [name]: value,
     });
   };
-  handleOnSubmit = () => {
-    if (this.state.password !== this.state.confirm) {
-      this.props.registerError("Passwords do not match");
-      return;
+
+  changePasswordType = () => {
+    let newState;
+    if (this.state.showPassword) {
+      newState = {
+        eye: "show",
+        showPassword: false,
+        password: this.state.password,
+      };
+    } else {
+      newState = {
+        eye: "eye-Off",
+        showPassword: true,
+        password: this.state.password,
+      };
     }
-    this.props.createEmailAccount(this.state.email, this.state.password);
+    this.setState(newState);
+  };
+
+  handleOnSubmit = () => {
+    this.props.loginEmailAccount(this.state.email, this.state.password);
   };
 
   render() {
     const { navigation, auth } = this.props;
     return (
       <ImageBackground
-        source={require("../assets/images/office2.jpg")}
+        source={require("../assets/images/office.jpg")}
         style={{ width: "100%", height: "100%" }}
         style={styles.Container}
       >
         <StatusBar translucent backgroundColor="transparent" />
-        <View style={styles.SignupCard}>
-          <View style={styles.SignupHeaderContainer}>
-            <Text style={styles.SignupHeaderText}>New Account</Text>
+        <View style={styles.loginCard}>
+          <View style={styles.LoginHeaderContainer}>
+            <Text style={styles.loginHeaderText}>Log in</Text>
           </View>
 
           <View style={styles.inputContainer}>
-            {/*{auth.error.register && (
-              <Text style={{ color: "red" }}>{auth.error.register}</Text>
-            )}*/}
-            <View style={styles.action}>
-              <Feather
-                name="user"
-                color="#fff"
-                size={20}
-                style={{ paddingTop: 14 }}
-              />
-              <TextInput
-                placeholder="Name"
-                keyboardType="text"
-                value={this.state.name}
-                onChangeText={(text) => {
-                  this.handleUpdateState("name", text);
-                }}
-                style={styles.textInput}
-                autoCapitalize="none"
-              />
-            </View>
-
             <View style={styles.action}>
               <Feather
                 name="mail"
@@ -94,6 +85,13 @@ class RegisterScreen extends Component {
                 style={styles.textInput}
                 autoCapitalize="none"
               />
+
+              <Feather
+                name="check-circle"
+                color="#fff"
+                size={20}
+                style={{ paddingTop: 14 }}
+              />
             </View>
 
             <View style={styles.action}>
@@ -109,54 +107,52 @@ class RegisterScreen extends Component {
                 onChangeText={(text) => {
                   this.handleUpdateState("password", text);
                 }}
-                secureTextEntry={true}
+                secureTextEntry={this.state.showPassword}
                 style={styles.textInput}
                 autoCapitalize="none"
                 onChangeText={(text) => {
                   this.handleUpdateState("password", text);
                 }}
               />
-            </View>
-            <View style={styles.action}>
-              <FontAwesome
-                name="lock"
-                color="#fff"
-                size={27}
-                style={{ paddingTop: 14 }}
-              />
-              <TextInput
-                placeholder="Confirm"
-                value={this.state.confirm}
-                onChangeText={(text) => {
-                  this.handleUpdateState("confirm", text);
-                }}
-                secureTextEntry={true}
-                style={styles.textInput}
-                autoCapitalize="none"
-                onChangeText={(text) => {
-                  this.handleUpdateState("confirm", text);
-                }}
-              />
+              <TouchableOpacity onPress={this.changePasswordType}>
+                <Feather
+                  name="eye"
+                  color="#fff"
+                  size={20}
+                  style={{ paddingTop: 15 }}
+                />
+              </TouchableOpacity>
             </View>
           </View>
 
           <View style={styles.opacityContainer}>
             <TouchableOpacity
               onPress={this.handleOnSubmit}
-              style={styles.SignupOpacity}
+              style={styles.logInOpacity}
             >
-              <Text style={styles.SignupText}>Register</Text>
+              <Text style={styles.loginText}>Log in</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.firstTimeContainer}>
-            <Text style={styles.firstTimeText}>Already have an account?</Text>
+            <Text style={styles.firstTimeText}>First time here?</Text>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("LoginScreen");
+                navigation.navigate("SignupScreen");
               }}
             >
-              <Text style={styles.signupText}>Login</Text>
+              <Text style={styles.signupText}>Sign up</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.resetAccountContainer}>
+            <Text style={styles.resetAccount}>Forgot password? </Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("RequestReset");
+              }}
+              style={styles.createAccountOpacity}
+            >
+              <Text style={styles.reset}>Reset</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -172,10 +168,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingLeft: 15,
   },
-  SignupCard: {
+  loginCard: {
     backgroundColor: "rgba(52, 52, 52, 0.8)",
     width: 330,
-    height: 500,
+    height: 400,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
@@ -183,12 +179,12 @@ const styles = StyleSheet.create({
     // marginVertical: 50,
   },
 
-  SignupHeaderContainer: {
+  loginHeaderContainer: {
     // flex: 0.2,
   },
-  SignupHeaderText: {
+  loginHeaderText: {
     color: "#BEFBFF",
-    fontSize: 35,
+    fontSize: 40,
     paddingLeft: 30,
     paddingVertical: 15,
   },
@@ -214,8 +210,8 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 0.8,
   },
-  SignupOpacity: {
-    width: 190,
+  logInOpacity: {
+    width: 250,
     height: 50,
     backgroundColor: "#0CF4ED",
     marginHorizontal: 15,
@@ -223,7 +219,7 @@ const styles = StyleSheet.create({
     marginVertical: 35,
     alignSelf: "center",
   },
-  SignupText: {
+  loginText: {
     color: "#141717",
     textAlign: "center",
     paddingVertical: 12,
@@ -245,6 +241,26 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingLeft: 5,
   },
+  resetAccountContainer: {
+    flexDirection: "row",
+    //flex: 1,
+    paddingBottom: 15,
+  },
+
+  resetAccount: {
+    marginLeft: 90,
+    fontSize: 15,
+    color: "#fff",
+    paddingTop: 19,
+    justifyContent: "center",
+  },
+
+  reset: {
+    color: "#f5050d",
+    fontSize: 16,
+    paddingTop: 19,
+    justifyContent: "center",
+  },
 });
 
 // const mapStateToProps = (state) => {
@@ -253,11 +269,4 @@ const styles = StyleSheet.create({
 //   };
 // };
 
-// const mapDispatchToProps = () => {
-//   return {
-//     createEmailAccount,
-//     registerError,
-//   };
-// };
-
-export default RegisterScreen;
+export default LoginScreen;
