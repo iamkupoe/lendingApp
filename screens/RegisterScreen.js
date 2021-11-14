@@ -256,4 +256,4 @@ const mapDispatchToProps = () => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())RegisterScreen;
+export default connect(mapStateToProps, mapDispatchToProps())(RegisterScreen);
