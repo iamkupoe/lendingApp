@@ -11,10 +11,10 @@ import {
 import Feather from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
-// import {
-//   createEmailAccount,
-//   registerError,
-// } from "./../redux/actions/authActions";
+import {
+  createEmailAccount,
+  registerError,
+} from "./../redux/actions/authActions";
 
 class RegisterScreen extends Component {
   constructor(props) {
@@ -243,17 +243,17 @@ const styles = StyleSheet.create({
   },
 });
 
-// const mapStateToProps = (state) => {
-//   return {
-//     auth: state,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    auth: state,
+  };
+};
 
-// const mapDispatchToProps = () => {
-//   return {
-//     createEmailAccount,
-//     registerError,
-//   };
-// };
+const mapDispatchToProps = () => {
+  return {
+    createEmailAccount,
+    registerError,
+  };
+};
 
-export default RegisterScreen;
+export default connect(mapStateToProps, mapDispatchToProps())RegisterScreen;

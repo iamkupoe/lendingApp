@@ -13,15 +13,13 @@ class StartScreen extends Component {
     const { navigation, auth } = this.props;
     return (
       <ImageBackground
-        source={require("../assets/images/office1.jpg")}
-        style={{ width: "100%", height: "100%" }}
+        source={require("../assets/images/start.jpg")}
+        style={{ width: "100%", height: "100%", backgroundColor: "blue" }}
         style={styles.mainContainer}
       >
-        <StatusBar barStyle="dark-content" backgroundColor="#06C8F4" />
+        <StatusBar translucent backgroundColor="transparent" />
         <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>
-            Keep Records and Customer Database
-          </Text>
+          <Text style={styles.headerText}>Deo Volente</Text>
         </View>
 
         <View style={styles.opacityContainer}>
@@ -46,7 +44,7 @@ class StartScreen extends Component {
 
         <View style={styles.getStartedContainer}>
           <Text style={styles.getStartedText}>
-            Get started by Logging in or Signing up
+            Get started by Login in or Sign up
           </Text>
         </View>
       </ImageBackground>
@@ -64,9 +62,9 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   headerText: {
-    color: "red",
+    color: "#a10869",
     paddingVertical: 60,
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: "bold",
     textAlign: "center",
   },
@@ -78,12 +76,12 @@ const styles = StyleSheet.create({
   logInOpacity: {
     width: 150,
     height: 50,
-    backgroundColor: "#08f8ff",
+    backgroundColor: "#a10869",
     marginHorizontal: 15,
     borderRadius: 10,
   },
   loginText: {
-    color: "#003133",
+    color: "#fff",
     textAlign: "center",
     paddingVertical: 12,
     fontWeight: "bold",
@@ -92,12 +90,12 @@ const styles = StyleSheet.create({
   signupOpacity: {
     width: 150,
     height: 50,
-    backgroundColor: "#08f8ff",
+    backgroundColor: "#a10869",
     marginHorizontal: 15,
     borderRadius: 10,
   },
   signupText: {
-    color: "#003133",
+    color: "#fff",
     textAlign: "center",
     paddingVertical: 12,
     fontWeight: "bold",
@@ -107,7 +105,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   getStartedText: {
-    color: "#95efff",
+    color: "#12d108",
+    fontFamily: "Roboto",
     textAlign: "center",
     fontSize: 20,
   },

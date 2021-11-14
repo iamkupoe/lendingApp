@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-// import { connect } from "react-redux";
-// import { loginEmailAccount } from "../redux/actions/authActions";
+import { connect } from "react-redux";
+import { loginEmailAccount } from "../redux/actions/authActions";
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -259,10 +259,10 @@ const styles = StyleSheet.create({
   },
 });
 
-// const mapStateToProps = (state) => {
-//   return {
-//     auth: state,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    auth: state,
+  };
+};
 
-export default LoginScreen;
+export default connect(mapStateToProps, { loginEmailAccount })(LoginScreen);

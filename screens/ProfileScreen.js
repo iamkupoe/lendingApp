@@ -11,8 +11,8 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-// import { connect } from "react-redux";
-// import { logout } from "../redux/actions/authActions";
+import { connect } from "react-redux";
+import { logout } from "../redux/actions/authActions";
 
 class ProfileScreen extends Component {
   constructor(props) {
@@ -177,17 +177,17 @@ const styles = StyleSheet.create({
   },
 });
 
-// const mapStateToProps = (state) => {
-//   return {
-//     auth: state,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    auth: state,
+  };
+};
 
-// const mapDispatchToProps = () => {
-//   return {
-//     // getSummary,
-//     // addTransactions,
-//   };
-// };
+const mapDispatchToProps = () => {
+  return {
+    // getSummary,
+    // addTransactions,
+  };
+};
 
-export default ProfileScreen;
+export default connect(mapStateToProps, { logout })(ProfileScreen);

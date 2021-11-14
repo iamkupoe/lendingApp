@@ -2,7 +2,7 @@ import React from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 
 import StartScreen from "../screens/StartScreen";
 import LogInScreen from "../screens/LoginScreen";
@@ -22,116 +22,118 @@ const Stack = createStackNavigator();
 function AppContainer({ auth }) {
   return (
     <NavigationContainer>
-      {/*}
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="HomeScreen"
-          component={TabScreen}
-        />
+      {auth.login ? (
+        <Stack.Navigator>
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="HomeScreen"
+            component={TabScreen}
+          />
 
-        <Stack.Screen
-          options={{
-            headerTitle: "Profile",
-            headerStyle: {
-              backgroundColor: "#4470da",
-            },
-            headerTintColor: "white",
-            headerTitleAlign: "center",
-          }}
-          name="EditProfileScreen"
-          component={ProfileScreen}
-        />
+          <Stack.Screen
+            options={{
+              headerTitle: "Profile",
+              headerStyle: {
+                backgroundColor: "#4470da",
+              },
+              headerTintColor: "white",
+              headerTitleAlign: "center",
+            }}
+            name="EditProfileScreen"
+            component={ProfileScreen}
+          />
 
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="HistoryScreen"
-          component={HistoryScreen}
-        />
-        <Stack.Screen
-          options={{
-            headerShown: true,
-            title: "New Loan",
-            headerStyle: {},
-            headerTintColor: "#00ABFE",
-          }}
-          name="LoanForm"
-          component={LoanForm}
-        />
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="HistoryScreen"
+            component={HistoryScreen}
+          />
+          <Stack.Screen
+            options={{
+              headerShown: true,
+              title: "New Loan",
+              headerStyle: {},
+              headerTintColor: "#00ABFE",
+            }}
+            name="LoanForm"
+            component={LoanForm}
+          />
 
-        <Stack.Screen
-          options={{
-            headerShown: true,
-            title: "New Customer",
-            headerStyle: {},
-            headerTintColor: "#00ABFE",
-          }}
-          name="NewCustomer"
-          component={NewCustomer}
-        />
+          <Stack.Screen
+            options={{
+              headerShown: true,
+              title: "New Customer",
+              headerStyle: {},
+              headerTintColor: "#00ABFE",
+            }}
+            name="NewCustomer"
+            component={NewCustomer}
+          />
 
-        <Stack.Screen
-          options={{
-            headerShown: true,
-            title: "Calendar",
-            headerStyle: {},
-            headerTintColor: "#00ABFE",
-          }}
-          name="CalendarScreen"
-          component={CalendarScreen}
-        />
-        </Stack.Navigator>*/}
-      <Stack.Navigator initialRouteName="StartScreen">
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="StartScreen"
-          component={StartScreen}
-        />
+          <Stack.Screen
+            options={{
+              headerShown: true,
+              title: "Calendar",
+              headerStyle: {},
+              headerTintColor: "#00ABFE",
+            }}
+            name="CalendarScreen"
+            component={CalendarScreen}
+          />
+        </Stack.Navigator>
+      ) : (
+        <Stack.Navigator initialRouteName="StartScreen">
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="StartScreen"
+            component={StartScreen}
+          />
 
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="LoginScreen"
-          component={LogInScreen}
-        />
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="LoginScreen"
+            component={LogInScreen}
+          />
 
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="SignupScreen"
-          component={SignupScreen}
-        />
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="RequestReset"
-          component={RequestReset}
-        />
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="ResetPassword"
-          component={ResetPassword}
-        />
-      </Stack.Navigator>
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="SignupScreen"
+            component={SignupScreen}
+          />
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="RequestReset"
+            component={RequestReset}
+          />
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="ResetPassword"
+            component={ResetPassword}
+          />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     auth: state,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    auth: state,
+  };
+};
 
-export default AppContainer;
+export default connect(mapStateToProps)(AppContainer);

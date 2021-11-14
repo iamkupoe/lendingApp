@@ -58,7 +58,7 @@ class HomeScreen extends Component {
               fontSize: 17,
               textAlign: "center",
               letterSpacing: 2,
-              marginTop: 5,
+              paddingTop: 5,
               margin: 6,
             }}
           >
@@ -88,8 +88,9 @@ class HomeScreen extends Component {
             style={{
               fontSize: 18,
               textAlign: "center",
-              marginBottom: 95,
+              marginBottom: 85,
               color: "#0017cf",
+              paddingTop: 15,
             }}
           >
             Getting loans disbursed easily
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
   },
 
   texts: {
-    marginTop: -50,
+    paddingTop: 10,
   },
 
   wrapper: {},
