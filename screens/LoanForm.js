@@ -88,6 +88,7 @@ class LoanForm extends Component {
 
   render() {
     //console.log(this.props.transact);
+    const { colors } = useTheme();
     return (
       <ScrollView>
         <StatusBar translucent backgroundColor="#06C8F4" />
@@ -269,7 +270,7 @@ class LoanForm extends Component {
                 this.handleOnSubmit();
               }}
             >
-              <Text style={styles.continueText}>Continue</Text>
+              <Text style={{ color: colors.Text }}>Continue</Text>
             </TouchableOpacity>
           </View>
         </View>

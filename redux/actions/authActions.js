@@ -98,8 +98,7 @@ export const AddNewClient = (
   };
 };
 
-{
-  /*export const addClient = (client) => {
+export const addClient = (client) => {
   console.log("add summary action", summary);
   return (dispatch, state, { getFirestore }) => {
     getFirestore()
@@ -126,8 +125,7 @@ export const AddNewClient = (
       payload: client,
     });
   };
-};*/
-}
+};
 
 {
   /*export const getSummary = () => {

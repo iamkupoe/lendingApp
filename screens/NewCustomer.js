@@ -6,14 +6,16 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Button, Image
 } from "react-native";
-
 import DatePicker from "react-native-datepicker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { v4 as uuid } from "uuid";
 import { FaRegImage } from "react-icons/fa";
-// import { AddNewProduct } from "../redux/actions/authActions";
-// import { connect } from "react-redux";
+import ImagePicker from 'react-native-image-picker';
+import { AddNewClient } from "../redux/actions/authActions";
+import { connect } from "react-redux";
+
 
 class NewCustomer extends Component {
   constructor(props) {
@@ -26,6 +28,7 @@ class NewCustomer extends Component {
       houseNumber: "",
       //   image: client,
       imageTofirestore: { name: "noImage.png" },
+      resourcePath: {},
     };
     this.fullName = this.fullName.bind(this);
     this.phoneNumber = this.phoneNumber.bind(this);
@@ -34,6 +37,40 @@ class NewCustomer extends Component {
     this.houseNumber = this.houseNumber.bind(this);
     this.img = this.img.bind(this);
   }
+
+  selectFile = () => {
+    var options = {
+      title: 'Select Image',
+      customButtons: [
+        { 
+          name: 'customOptionKey', 
+          title: 'Choose file from Custom Option' 
+        },
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    ImagePicker.showImagePicker(options, res => {
+      console.log('Response = ', res);
+
+      if (res.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (res.error) {
+        console.log('ImagePicker Error: ', res.error);
+      } else if (res.customButton) {
+        console.log('User tapped custom button: ', res.customButton);
+        alert(res.customButton);
+      } else {
+        let source = res;
+        this.setState({
+          resourcePath: source,
+        });
+      }
+    });
+  };
 
   fullName(e) {
     this.setState({
@@ -79,7 +116,8 @@ class NewCustomer extends Component {
 
     this.props.transactions(data);
 
-    //this.props.addTransaction(data)
+    this.props.addTransaction(data)
+    this.props.handleAddPClient();
   };
 
   imageHandler = (e) => {
@@ -245,22 +283,24 @@ class NewCustomer extends Component {
             />
           </View>
           <View>
-            <TouchableOpacity
-              onPress={() => {
-                this.handleImg();
-              }}
-            >
-              <View
-                style={{
-                  alignItems: "flex-start",
-                  marginTop: -5,
-                  marginLeft: 15,
-                }}
-              >
-                <Icon name="account-edit" color="purple" size={30} />
-              </View>
-              <Text style={{ color: "purple" }}>Upload Image</Text>
-            </TouchableOpacity>
+          <Image
+          source={{
+            uri: 'data:images/jpeg;base64,' + this.state.resourcePath.data,
+          }}
+          style={{ width: 100, height: 100 }}
+        />
+        <Image
+          source={{ uri: this.state.resourcePath.uri }}
+          style={{ width: 200, height: 50 }}
+        />
+        <Text style={{ alignItems: 'center' }}>
+          {this.state.resourcePath.uri}
+        </Text>
+
+        <TouchableOpacity onPress={this.selectFile} style={styles.button}  >
+            <Text style={styles.buttonText}>Select File</Text>
+        </TouchableOpacity>    
+          
           </View>
           <View style={styles.opacityContainer}>
             <TouchableOpacity
@@ -397,18 +437,29 @@ const styles = StyleSheet.create({
     paddingTop: 13,
     fontWeight: "bold",
   },
+
+  button:{
+    backgroundColor: "red",
+    width: 60,
+    height: 30,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "#fff",
+    paddingTop: 1
+  }
 });
 
-// const mapStateToProps = (state) => {
-//   return {
-//     state,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    state,
+  };
+};
 
-// const mapDispatchToProps = () => {
-//   return {
-//     AddNewProduct,
-//   };
-// };
+const mapDispatchToProps = () => {
+  return {
+    AddNewClient,
+  };
+};
 
-export default NewCustomer;
+export default connect(mapStateToProps, mapDispatchToProps()) (NewCustomer);

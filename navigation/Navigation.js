@@ -2,6 +2,8 @@ import React from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+// import { AppearanceProvider, useColorScheme } from "react-native-appearance";
+// import { DefaultTheme, DarkTheme } from "@react-navigation/native";
 import { connect } from "react-redux";
 
 import StartScreen from "../screens/StartScreen";
@@ -17,11 +19,14 @@ import HistoryScreen from "../screens/History";
 import RequestReset from "./../screens/RequestPassword";
 import ResetPassword from "./../screens/ResetPassword";
 
+
 const Stack = createStackNavigator();
+// const scheme = useColorScheme();
 
 function AppContainer({ auth }) {
   return (
-    <NavigationContainer>
+    // <AppearanceProvider>
+    <NavigationContainer >
       {auth.login ? (
         <Stack.Navigator>
           <Stack.Screen
@@ -127,6 +132,7 @@ function AppContainer({ auth }) {
         </Stack.Navigator>
       )}
     </NavigationContainer>
+    // </AppearanceProvider>
   );
 }
 

@@ -4,6 +4,7 @@ import {
   Text,
   View,
   StatusBar,
+  Image,
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
@@ -19,6 +20,15 @@ class StartScreen extends Component {
       >
         <StatusBar translucent backgroundColor="transparent" />
         <View style={styles.headerContainer}>
+          <Image
+            style={{
+              height: 120,
+              width: 120,
+              alignSelf: "center",
+              marginTop: 60,
+            }}
+            source={require("../assets/images/Deo.png")}
+          />
           <Text style={styles.headerText}>Deo Volente</Text>
         </View>
 
@@ -43,9 +53,7 @@ class StartScreen extends Component {
         </View>
 
         <View style={styles.getStartedContainer}>
-          <Text style={styles.getStartedText}>
-            Get started by Login in or Sign up
-          </Text>
+          <Text style={styles.getStartedText}>Get started</Text>
         </View>
       </ImageBackground>
     );
@@ -62,8 +70,7 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   headerText: {
-    color: "#a10869",
-    paddingVertical: 60,
+    color: "purple",
     fontSize: 35,
     fontWeight: "bold",
     textAlign: "center",
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
   logInOpacity: {
     width: 150,
     height: 50,
-    backgroundColor: "#a10869",
+    backgroundColor: "purple",
     marginHorizontal: 15,
     borderRadius: 10,
   },
@@ -90,7 +97,7 @@ const styles = StyleSheet.create({
   signupOpacity: {
     width: 150,
     height: 50,
-    backgroundColor: "#a10869",
+    backgroundColor: "purple",
     marginHorizontal: 15,
     borderRadius: 10,
   },
@@ -105,7 +112,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   getStartedText: {
-    color: "#12d108",
+    color: "#bd03d3",
     fontFamily: "Roboto",
     textAlign: "center",
     fontSize: 20,
